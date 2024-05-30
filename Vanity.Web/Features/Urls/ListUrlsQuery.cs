@@ -3,10 +3,7 @@ using Vanity.Web.Models.Urls;
 
 namespace Vanity.Web.Features.Urls;
 
-public sealed record ListUrlsQuery : IRequest<List<UrlResponse>>
-{
-    public string Url { get; init; } = string.Empty;
-}
+public sealed record ListUrlsQuery : IRequest<List<UrlResponse>>;
 
 public sealed class ListUrlsQueryHandler : IRequestHandler<ListUrlsQuery, List<UrlResponse>>
 {

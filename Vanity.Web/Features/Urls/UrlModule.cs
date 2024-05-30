@@ -4,7 +4,7 @@ using Vanity.Web.Models.Urls;
 
 namespace Vanity.Web.Features.Urls;
 
-public class UrlModule : CarterModule
+internal class UrlModule : CarterModule
 {
     public UrlModule()
         : base("/")
