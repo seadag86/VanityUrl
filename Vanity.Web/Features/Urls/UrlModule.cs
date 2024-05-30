@@ -6,11 +6,6 @@ namespace Vanity.Web.Features.Urls;
 
 internal class UrlModule : CarterModule
 {
-    public UrlModule()
-        : base("/")
-    {
-    }
-
     public override void AddRoutes(IEndpointRouteBuilder app)
     {
         app.MapGet("/", async (ISender sender) =>
@@ -20,10 +15,10 @@ internal class UrlModule : CarterModule
             return Results.Ok();
         });
 
-        app.MapPost("/", (string url, ISender sender) =>
+        app.MapPost("/", (UrlRequest request) =>
         {
 
-            if (Uri.TryCreate(url, UriKind.Absolute, out Uri? _))
+            if (Uri.TryCreate(request.Url, UriKind.Absolute, out Uri? _))
             {
                 return Results.BadRequest("Invalid URL");
             }

@@ -1,4 +1,5 @@
 ﻿using System.Text.RegularExpressions;
+using Vanity.Web.Data;
 
 namespace Vanity.Web.Features.Urls;
 
@@ -8,7 +9,13 @@ internal class UrlService
     private const string CodeAlphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
     
     private readonly Random _random = new Random();
-    
+    private readonly ApplicationDbContext _dbContext;
+
+    public UrlService(ApplicationDbContext dbContext)
+    {
+        _dbContext = dbContext;
+    }
+
     public string GenerateRandomUrlCode()
     {
         var codeCharactrs = new char[CodeLength];
