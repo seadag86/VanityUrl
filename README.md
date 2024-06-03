@@ -1,6 +1,6 @@
 # Vanity URL Generator
 
-[![Build Status](https://github.com/seadag86/VanityUrl/actions/workflows/ci/badge.svg)]
+[![Build Status](https://github.com/seadag86/VanityUrl/.github/workflows/ci.yml/badge.svg)]
 
 This is a simple ASP.NET Core WebAPI designed to generate shortened URLs using a random code or specified alias.
 
