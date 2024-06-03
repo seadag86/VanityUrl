@@ -1,6 +1,5 @@
 ﻿using Carter;
 using MediatR;
-using Microsoft.AspNetCore.Http;
 using Vanity.Web.Features.Urls.Commands;
 using Vanity.Web.Features.Urls.Queries;
 using Vanity.Web.Models.Urls;

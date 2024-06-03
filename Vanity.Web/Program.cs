@@ -58,3 +58,6 @@ app.UseHttpsRedirection();
 app.MapCarter();
 
 app.Run();
+
+// Required for API functional tests
+public partial class Program { }

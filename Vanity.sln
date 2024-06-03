@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.10.34928.147
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vanity.Web", "Vanity.Web\Vanity.Web.csproj", "{3B6AEE62-0138-4CB9-8D05-01E10D91E02A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vanity.Web", "Vanity.Web\Vanity.Web.csproj", "{3B6AEE62-0138-4CB9-8D05-01E10D91E02A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vanity.Tests", "Vanity.Tests\Vanity.Tests.csproj", "{72519092-F72B-40E4-BAC3-6B814648CF7F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{3B6AEE62-0138-4CB9-8D05-01E10D91E02A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3B6AEE62-0138-4CB9-8D05-01E10D91E02A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3B6AEE62-0138-4CB9-8D05-01E10D91E02A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{72519092-F72B-40E4-BAC3-6B814648CF7F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{72519092-F72B-40E4-BAC3-6B814648CF7F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{72519092-F72B-40E4-BAC3-6B814648CF7F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{72519092-F72B-40E4-BAC3-6B814648CF7F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
