@@ -1,2 +1,2 @@
 # For more info on HTTP files go to https://aka.ms/vs/httpfile
-GET http://localhost:5162/dnd-character-class-features
+GET http://localhost:5162/api/urls

@@ -30,6 +30,13 @@ builder.Services.AddSwaggerGen(options =>
     });
 });
 
+builder.Services.AddOutputCache(options =>
+{
+    // Set the default cache duration to 10 minutes
+    options.DefaultExpirationTimeSpan = TimeSpan.FromMinutes(15);
+    options.AddBasePolicy(x => x.With(c => c.HttpContext.Request.Query["nocache"] == "true").NoCache());
+});
+
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("Database"));
@@ -56,6 +63,8 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.MapCarter();
+
+app.UseOutputCache();
 
 app.Run();
 

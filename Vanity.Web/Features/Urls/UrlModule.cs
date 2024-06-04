@@ -1,5 +1,6 @@
 ﻿using Carter;
 using MediatR;
+using Microsoft.AspNetCore.OutputCaching;
 using Vanity.Web.Features.Urls.Commands;
 using Vanity.Web.Features.Urls.Queries;
 using Vanity.Web.Models.Urls;
@@ -11,7 +12,7 @@ public class UrlModule : CarterModule
     public override void AddRoutes(IEndpointRouteBuilder app)
     {
         /// <summary>
-        /// Handles the GET request at the root ("/") endpoint.
+        /// Gets a list of urls in the database.
         /// </summary>
         /// <returns>A list of UrlResponse objects wrapped in an Ok result.</returns>
         app.MapGet("/api/urls", async (IMediator _mediator) =>
@@ -26,10 +27,11 @@ public class UrlModule : CarterModule
             {
                 Summary = "Get all shortened or beautified URLs",
                 Description = "List all shortened or beautified URLs and their corresponding 'original' URLs"
-            });
+            })
+            .CacheOutput(x => x.Tag("urls"));
 
         /// <summary>
-        /// Handles the GET by alias request at the root ("/") endpoint.
+        /// Gets the shortened URL by the alias and redirects the request.
         /// </summary>
         app.MapGet("/{alias}", async (string alias, IMediator mediator) =>
         {
@@ -50,11 +52,11 @@ public class UrlModule : CarterModule
                 // summary and description
                 Summary = "Get a shortened URL by the alias",
                 Description = "Pass in a URL with optional alias to be redirected to shortened URL"
-            });
-
+            })
+            .CacheOutput(x => x.Tag("urls"));
 
         /// <summary>
-        /// Create a shortened URL with a randome code.
+        /// Create a shortened URL with a randome code or specified alias.
         /// </summary>
         /// <param name="request">The request containing the URL to be processed.</param>
         /// <returns>An Ok result if the URL is valid, otherwise a BadRequest result with an error message.</returns>
@@ -62,7 +64,9 @@ public class UrlModule : CarterModule
             UrlRequest request, 
             IMediator mediator, 
             UrlService urlService, 
-            HttpContext httpContext
+            IOutputCacheStore cacheStore,
+            HttpContext httpContext,
+            CancellationToken cancellationToken
         ) =>
         {
             if (!Uri.TryCreate(request.Url, UriKind.Absolute, out Uri? _))
@@ -75,6 +79,8 @@ public class UrlModule : CarterModule
                 : urlService.StringToAlias(request.Alias);
             string shortUrlBase = $"{httpContext.Request.Scheme}://{httpContext.Request.Host}";
             var shortenedUrl = await mediator.Send(new CreateUrlCommand(request.Url, shortUrlBase, urlCode));
+
+            await cacheStore.EvictByTagAsync("urls", cancellationToken);
 
             return Results.Ok(shortenedUrl);
         })
